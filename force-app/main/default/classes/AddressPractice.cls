@@ -1,4 +1,5 @@
 public class AddressPractice {
+    //this is homeAddress method.
     public void homeAddress(){
         string name = 'Vitap';
         system.debug('name = ' + name);
