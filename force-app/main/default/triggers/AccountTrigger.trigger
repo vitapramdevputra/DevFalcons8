@@ -2,8 +2,25 @@ trigger AccountTrigger on Account (before insert, before update, after insert, a
   
 
     system.debug('====Trigger START====');
+    if (trigger.isBefore) {
+        AccountTriggerHandler.updateAccountDescription(Trigger.New, Trigger.Old, Trigger.NewMap, Trigger.OldMap);
+    }
+    
+    system.debug('====Trigger END====');
+    
+   
+    
+    
+    
 
-    if(trigger.isAfter && trigger.isUpdate){
+
+
+
+
+
+/*
+
+if(trigger.isAfter && trigger.isUpdate){
         integer countWebSiteUpdate = 0;
 
         map<id, account> trgOldMap = trigger.oldMap;
@@ -17,7 +34,7 @@ trigger AccountTrigger on Account (before insert, before update, after insert, a
 
             account oldAcc = trgOldmap.get(eachId);
             string oldWebSite = oldAcc.Website;
-
+            //to check if website field is changed, do the following
             if(newWebSite != oldWebSite){
                 system.debug('Acc Name : ' + newAcc.Name + ', website is changed TO ===>>> ' + newWebsite);
                 countWebSiteUpdate++;
@@ -25,21 +42,8 @@ trigger AccountTrigger on Account (before insert, before update, after insert, a
         }
         system.debug('count of website updated accounts => ' + countwebsiteupdate);
     }
-    system.debug('====Trigger END====');
-    
-   
-    
-    
-    
 
-
-
-
-
-
-
-
-
+*/
 
 
 
