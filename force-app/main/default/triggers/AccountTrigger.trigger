@@ -5,6 +5,9 @@ trigger AccountTrigger on Account (before insert, before update, after insert, a
     if (trigger.isBefore) {
         AccountTriggerHandler.updateAccountDescription(Trigger.New, Trigger.Old, Trigger.NewMap, Trigger.OldMap);
     }
+    if (trigger.isAfter && trigger.isUpdate) {
+        AccountTriggerHandler.updateVIPForAllContacts(Trigger.New, Trigger.Old, Trigger.NewMap, Trigger.OldMap);
+    }
     
     system.debug('====Trigger END====');
     

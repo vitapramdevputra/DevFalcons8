@@ -23,4 +23,17 @@ public class ContactTriggerHandler {
             }
         }
     }
+
+    public static void updateAccountRollUpField(set<id> accountIds) {
+        //Fetch all accounts and its related contact using inner query
+        List<account> listAccounts = [select id, number_of_contacts__c, (select id from Contacts) from account where id in :accountIds];
+        for (account eachAccount : listAccounts) {
+            List<contact> accContacts = eachAccount.contacts;
+            //get number of contact.
+            integer noOfContacts = accContacts.size();
+            eachAccount.number_of_contacts__c = noOfContacts;
+        }
+        update listAccounts;
+
+    }
 }
