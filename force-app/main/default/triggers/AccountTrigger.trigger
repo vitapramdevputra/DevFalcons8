@@ -13,6 +13,8 @@ trigger AccountTrigger on Account (before insert, before update, after insert, a
     }
     if (trigger.isAfter && trigger.isUpdate) {
         AccountTriggerHandler.updateVIPForAllContacts(Trigger.New, Trigger.Old, Trigger.NewMap, Trigger.OldMap);
+        //call handler method to update contact's phone number
+        AccountTriggerHandlerP.updateContactsPhones(Trigger.New, Trigger.NewMap, Trigger.Old, Trigger.OldMap);
         //call handler method to update opportunities.
         AccountTriggerHandlerP.updateOpportunityToLost(Trigger.New, Trigger.NewMap, Trigger.Old, Trigger.OldMap);
     }

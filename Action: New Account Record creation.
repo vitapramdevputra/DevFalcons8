@@ -22,3 +22,13 @@ Which object to write trigger?
 
 Which event do we have to write the automation?
     -> AFter Update .
+
+3.
+Action: Account is updated. Account's phone field is changed.
+    Automation: update its related contacts's other phone and mobile phone.
+
+Which object to write trigger?
+    Account. Why? Action is happening in account object.
+
+Which event?
+    -> After Update
