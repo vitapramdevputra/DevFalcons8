@@ -5,8 +5,16 @@ trigger AccountTrigger on Account (before insert, before update, after insert, a
     if (trigger.isBefore) {
         AccountTriggerHandler.updateAccountDescription(Trigger.New, Trigger.Old, Trigger.NewMap, Trigger.OldMap);
     }
+    if(trigger.isAfter && trigger.isInsert){
+        //call our handler method.
+        //we do not need Trigger.old and trigger.oldMap.
+        //trigger.newMap is not null here?? 
+        AccountTriggerHandlerP.createDefaultContact(trigger.new, trigger.newMap);
+    }
     if (trigger.isAfter && trigger.isUpdate) {
         AccountTriggerHandler.updateVIPForAllContacts(Trigger.New, Trigger.Old, Trigger.NewMap, Trigger.OldMap);
+        //call handler method to update opportunities.
+        AccountTriggerHandlerP.updateOpportunityToLost(Trigger.New, Trigger.NewMap, Trigger.Old, Trigger.OldMap);
     }
     
     system.debug('====Trigger END====');
