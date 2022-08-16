@@ -1,0 +1,12 @@
+1. Test class -> @isTest --> ClassNameTest
+2. Test method -> @isTest
+    -> call the method which we want to test.
+    -> if data is required, then we prepare data and then we call our method.
+    -> assert to verify if method is working as expected.
+        a. Prepare data
+        b1. test.startTest
+        c. call method
+        b2. test.stopTest
+        d. assert
+3. TestSetup -> @TestSetup
+    -> prepare common data for entire test class.
