@@ -1,4 +1,15 @@
 public with sharing class SalesforceProjectTriggerHandler {
+    @future
+    public static void updateProjectDescription(set<id> setSPIds) {
+        List<Salesforce_Project__c> listSP = [select id, name, description__c from Salesforce_Project__c where id in :setSPIds];
+
+        for (salesforce_project__c eachSP : listSP) {
+            eachSP.Description__c = eachSP.Description__c + '. Updated from future';
+        }
+        update listSP;
+    }
+
+
    public static void createDefaultSalesforceTicket(List<salesforce_project__c> spTriggerNew) {
        //create one empty list of ticket
        List<Salesforce_Ticket__c> newSTList = new List<Salesforce_Ticket__c>();
