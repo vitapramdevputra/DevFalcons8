@@ -1,4 +1,36 @@
 public with sharing class SalesforceProjectTriggerHandler {
+
+    public static void spCompletedStatus(List<salesforce_project__c> spTriggerNew,
+        List<Salesforce_Project__c> spTriggerOld,
+        Map<id, salesforce_project__c> spTriggerNewMap,
+        Map<id, salesforce_project__c> spTriggerOldMap) {
+        
+            set<id> spIds = new set<id>();
+            for (salesforce_project__c spRecord : spTriggerNew) {
+                Salesforce_Project__c spOld = spTriggerOldMap.get(spRecord.Id);
+                if(spRecord.Status__c == 'Completed' && spOld.Status__c != 'Completed'){
+                    spIds.add(spRecord.Id);
+                }
+            }
+            if (!spIds.isEmpty()) {
+                //here we call FUTURE method.
+                updateTicketStatusCompleted(spIds);
+            }
+    }
+
+    @future
+    public static void updateTicketStatusCompleted(set<id> spIds) {
+        List<Salesforce_Ticket__c> listST = [select id, status__c, salesforce_project__c
+                                            from Salesforce_Ticket__c WHERE
+                                            Salesforce_Project__c in :spIds and status__c != 'Completed'];
+        for (salesforce_ticket__c sRecord : listST) {
+            sRecord.Status__c = 'Completed';
+        }
+        update listST;
+    }
+
+
+
     @future
     public static void updateProjectDescription(set<id> setSPIds) {
         List<Salesforce_Project__c> listSP = [select id, name, description__c from Salesforce_Project__c where id in :setSPIds];
