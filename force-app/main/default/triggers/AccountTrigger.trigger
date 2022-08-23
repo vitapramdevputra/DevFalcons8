@@ -5,6 +5,11 @@ trigger AccountTrigger on Account (before insert, before update, after insert, a
     if (trigger.isBefore) {
         AccountTriggerHandler.updateAccountDescription(Trigger.New, Trigger.Old, Trigger.NewMap, Trigger.OldMap);
     }
+    if(trigger.isAfter && trigger.isInsert){
+        AccountsQueueableExample aq = new AccountsQueueableExample(trigger.new);
+        ID jobId = system.enqueueJob(aq);
+        system.debug('job id is ..... ' + jobId);
+    }
     // if(trigger.isAfter && trigger.isInsert){
     //     //call our handler method.
     //     //we do not need Trigger.old and trigger.oldMap.
