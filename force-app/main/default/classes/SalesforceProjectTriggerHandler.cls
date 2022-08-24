@@ -43,17 +43,25 @@ public with sharing class SalesforceProjectTriggerHandler {
 
 
    public static void createDefaultSalesforceTicket(List<salesforce_project__c> spTriggerNew) {
-       //create one empty list of ticket
-       List<Salesforce_Ticket__c> newSTList = new List<Salesforce_Ticket__c>();
-       for (salesforce_project__c eachSP : spTriggerNew) {
-           Salesforce_Ticket__c st = new Salesforce_Ticket__c();
-           st.Subject__c = 'Default ST';
-           st.Salesforce_Project__c = eachSP.id;
-           newSTList.add(st);
+       try{
+            //create one empty list of ticket
+            List<Salesforce_Ticket__c> newSTList = new List<Salesforce_Ticket__c>();
+            for (salesforce_project__c eachSP : spTriggerNew) {
+                Salesforce_Ticket__c st = new Salesforce_Ticket__c();
+                st.Subject__c = 'Default ST';
+                st.Salesforce_Project__c = eachSP.id;
+                newSTList.add(st);
+            }
+            if(!newSTList.isEmpty()){
+                insert newSTList;
+            }
+       } catch(Exception ex){
+           system.debug('THERE IS ERROR. FIX');
+           for (salesforce_project__c eachSP : spTriggerNew) {
+               eachSP.addError('Salesforce Ticket creation failed. Please contact your administrator NOT DEVELOPER');
+           }
        }
-       if(!newSTList.isEmpty()){
-           insert newSTList;
-       }
+       
    }
 
    public static void validateProjectCompletion(List<salesforce_project__c> spTriggerNew,

@@ -6,9 +6,9 @@ trigger AccountTrigger on Account (before insert, before update, after insert, a
         AccountTriggerHandler.updateAccountDescription(Trigger.New, Trigger.Old, Trigger.NewMap, Trigger.OldMap);
     }
     if(trigger.isAfter && trigger.isInsert){
-        AccountsQueueableExample aq = new AccountsQueueableExample(trigger.new);
-        ID jobId = system.enqueueJob(aq);
-        system.debug('job id is ..... ' + jobId);
+        //AccountsQueueableExample aq = new AccountsQueueableExample(trigger.new);
+        //ID jobId = system.enqueueJob(aq);
+        //system.debug('job id is ..... ' + jobId);
     }
     // if(trigger.isAfter && trigger.isInsert){
     //     //call our handler method.
