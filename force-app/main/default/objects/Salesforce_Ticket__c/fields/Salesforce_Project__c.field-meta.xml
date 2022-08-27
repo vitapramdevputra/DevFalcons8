@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Salesforce_Project__c</fullName>
+    <externalId>false</externalId>
+    <label>Salesforce Project</label>
+    <referenceTo>Salesforce_Project__c</referenceTo>
+    <relationshipLabel>Salesforce Tickets</relationshipLabel>
+    <relationshipName>Salesforce_Tickets</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>true</reparentableMasterDetail>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

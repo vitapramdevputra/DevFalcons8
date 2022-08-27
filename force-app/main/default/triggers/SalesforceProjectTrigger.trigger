@@ -1,6 +1,8 @@
 trigger SalesforceProjectTrigger on Salesforce_Project__c (before insert, after insert, before update, after update) {
     
     if (trigger.isAfter && trigger.isInsert) {
+        system.debug('*** sp after insert CODE...');
+        system.debug('*** sp after insert trigger.newMap ...' + trigger.newMap);
         Map<id, Salesforce_Project__c> spNewMap = trigger.newMap;
         Set<id> setID = spNewMap.keySet();
         SalesforceProjectTriggerHandler.updateProjectDescription(setID);

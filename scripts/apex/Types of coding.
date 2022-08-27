@@ -1,0 +1,17 @@
+Types of coding.
+
+- Back end
+    - Apex.
+        -> where does apex code execute?
+            -> it runs sf server (or cloud)
+
+- Front end (SALESFORCE)
+    - HTML, JS, CSS -> AURA, VISUALFORCE (VF PAGE), LWC
+    -> where does JavaScript code execute?
+        -> browser
+
+
+
+Mac/windows
+- UI --> flutter
+- backend --> java, python, 

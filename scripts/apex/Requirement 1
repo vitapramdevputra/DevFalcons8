@@ -1,0 +1,12 @@
+Requirement 1
+
+- When opportunity is created by user. -> Create one default opportunity product record to that opportunity.
+
+In which object to write trigger?
+- where is user doing the action?
+    - opportunity.
+    so, we write trigger in opportunity.
+
+a) Go ahead and create new trigger?
+
+b) Check if it already exists? and Update it? if not, then a)

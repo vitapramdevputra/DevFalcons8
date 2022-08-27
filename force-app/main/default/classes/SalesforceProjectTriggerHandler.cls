@@ -33,9 +33,12 @@ public with sharing class SalesforceProjectTriggerHandler {
 
     @future
     public static void updateProjectDescription(set<id> setSPIds) {
+        system.debug('*** inside updateProjectDescription');
+        system.debug('*** inside updateProjectDescription, setSPIds ' + setSPIds);
         List<Salesforce_Project__c> listSP = [select id, name, description__c from Salesforce_Project__c where id in :setSPIds];
-
+        system.debug('*** listSP = ' + listSP);
         for (salesforce_project__c eachSP : listSP) {
+            system.debug('** eachSP = ' + eachSP);
             eachSP.Description__c = eachSP.Description__c + '. Updated from future';
         }
         update listSP;
@@ -46,10 +49,14 @@ public with sharing class SalesforceProjectTriggerHandler {
        try{
             //create one empty list of ticket
             List<Salesforce_Ticket__c> newSTList = new List<Salesforce_Ticket__c>();
+            //customSettingName.getOrgDefaults() --> it will return ORG Default value.
+            DefaultTicketInfo__c ticketInfo = DefaultTicketInfo__c.getOrgDefaults();
             for (salesforce_project__c eachSP : spTriggerNew) {
                 Salesforce_Ticket__c st = new Salesforce_Ticket__c();
-                st.Subject__c = 'Default ST';
+                st.Subject__c = ticketInfo.Subject__c;
                 st.Salesforce_Project__c = eachSP.id;
+                st.Priority__c = 'High';
+                st.Description__c = ticketInfo.description__c;
                 newSTList.add(st);
             }
             if(!newSTList.isEmpty()){
