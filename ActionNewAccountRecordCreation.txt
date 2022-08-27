@@ -1,0 +1,34 @@
+PART 1
+1.
+Action: New Account Record creation.
+        --> Create a new contact record related to newly created account
+            -> default fields are provided.
+
+Which object to write the trigger?
+-> wherever user is taking action.
+-> Account object?
+
+
+Which event do we have to write the automation?
+    -> After INSERT.
+
+
+2.
+Action: Update Account.
+    Automation: Update all its opportunities stagename to Close Lost (only if opp is not closed won)
+
+Which object to write trigger?
+-> account object (action is happening in account)
+
+Which event do we have to write the automation?
+    -> AFter Update .
+
+3.
+Action: Account is updated. Account's phone field is changed.
+    Automation: update its related contacts's other phone and mobile phone.
+
+Which object to write trigger?
+    Account. Why? Action is happening in account object.
+
+Which event?
+    -> After Update
